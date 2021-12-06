@@ -1,0 +1,58 @@
+package tests;
+
+import org.testng.annotations.Test;
+
+import pages.ControlesOperativosPage;
+import pages.HomePage;
+
+import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+
+public class TestControlesOperativos {
+	
+	WebDriver driver;
+	String PATH_DRIVER = "./drivers/chromedriver.exe";
+	String TYPE_DRIVER = "webdriver.chrome.driver";
+	
+	HomePage home;
+	ControlesOperativosPage controles;
+
+		
+	
+	@BeforeMethod
+	public void beforeMethod() {
+		System.setProperty(TYPE_DRIVER, PATH_DRIVER);
+		driver = new ChromeDriver();
+		
+		//System.setProperty("webdriver.gecko.driver", "./drivers/geckodriver.exe");
+		//driver = new FirefoxDriver();
+		
+		driver.manage().window().maximize();
+		driver.get("https://s6169rc:Almoca26@servicios-i.redsys.es:54443/portal-ea/");
+		
+		home = new HomePage(driver);
+		
+	}
+	
+	
+	@Test
+	public void testControlesOperativos() {
+		home.irControlesOperativos();
+		controles = new ControlesOperativosPage(driver);
+		controles.setTarjeta("5351200549004018");
+		controles.setFechacaducidad("2025/05");
+		controles.clicarConsultar();
+		Assert.assertEquals("ERROR - Error de tarjeta inexistente", controles.getMensajeError());		
+		
+	}
+	
+
+	@AfterMethod
+	public void afterMethod() {
+		driver.quit();
+	}
+
+}

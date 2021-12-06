@@ -1,0 +1,25 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class ControlesOperativosResultPage {
+	
+	WebDriver driver;
+	
+	By ok = By.xpath("//div[@class=\"alert success\"]");
+	
+	public ControlesOperativosResultPage(WebDriver driver) {
+		this.driver = driver;	
+	}
+	
+	public String getMensajeExito() {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.textToBe(ok, "OK"));
+		return driver.findElement(ok).getText();		
+		
+	}
+
+}

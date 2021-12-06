@@ -1,0 +1,180 @@
+package tests;
+import org.testng.annotations.Test;
+import pages.ControlesOperativosPage;
+import pages.HomePage;
+import pages.ServiciosTarjetaPage;
+
+import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+public class TestServiciosTarjeta {
+
+	
+		
+		WebDriver driver;
+		String PATH_DRIVER = "./drivers/chromedriver.exe";
+		String TYPE_DRIVER = "webdriver.chrome.driver";
+		
+		HomePage home;
+		ServiciosTarjetaPage serviciosTarjeta;
+		
+		@BeforeMethod
+		public void beforeMethod() {
+			System.setProperty(TYPE_DRIVER, PATH_DRIVER);
+			driver = new ChromeDriver();
+			
+			//System.setProperty("webdriver.gecko.driver", "./drivers/geckodriver.exe");
+			//driver = new FirefoxDriver();
+			
+			driver.manage().window().maximize();
+			driver.get("https://s6505gp:Portatil.2026@servicios-i.redsys.es:54443/portal-ea/");
+			
+			home = new HomePage(driver);
+			
+		}
+		
+		
+		@Test
+		public void testServiciosTarjeta() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarConsultarDatos();
+			serviciosTarjeta.setTarjeta("4511260300199530");
+			serviciosTarjeta.ClicarConsultar();
+			serviciosTarjeta.ClicarConsultarFamilia();
+
+
+		}
+
+		@Test
+		public void testServiciosTarjetaDNI() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarConsultarTarjetasDNI();
+			serviciosTarjeta.setDNI("51921205Q");
+			serviciosTarjeta.ClicarConsultarDNI();
+			serviciosTarjeta.ClicarConsultarNuevoDNI();
+
+		}
+
+		@Test
+		public void testServiciosTarjetaNIF() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarConsultarTarjetasDNI();
+			serviciosTarjeta.setDNI("51921205Q");
+			serviciosTarjeta.ClicarConsultarDNI();
+			serviciosTarjeta.ClicarConsultarNuevoDNI();
+
+		}
+			
+		@Test
+		public void testActivarDesactivar() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarConsultarActivar();
+			serviciosTarjeta.setTarjeta("4511260300199530");
+			serviciosTarjeta.ClicarConsultarActivarDesactivar();
+			serviciosTarjeta.ClicarConsultarNuevoDatos();
+	
+			
+		}
+		
+		@Test
+		public void testActivarDatos() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarConsultarActivar();
+			serviciosTarjeta.setTarjeta("4511260300199530");
+			serviciosTarjeta.ClicarConsultarDatosTar();
+			serviciosTarjeta.ClicarConsultarNuevoDatos();
+		}
+
+		
+		@Test
+		public void testServiciosPIN() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarConsultarPIN();
+			serviciosTarjeta.setTarjeta("4511260300199530");
+			serviciosTarjeta.ClicarConsultar();
+			serviciosTarjeta.ClicarNuevo();
+			
+	
+
+
+	}
+		@Test
+		public void testServiciosPINFamilia() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarConsultarPIN();
+			serviciosTarjeta.setTarjeta("4511260300199530");
+			serviciosTarjeta.ClicarConsultarFamilia();
+			serviciosTarjeta.ClicarNuevo();
+
+
+
+		}
+				
+		@Test
+		public void testServiciosDebito() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarConsultarDebito();
+			serviciosTarjeta.setTarjeta("5351200549004018 ");
+			serviciosTarjeta.ClicarConsultar();
+			serviciosTarjeta.Modificar();
+
+		}
+
+		@Test
+		public void testServiciosCredito() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarConsultarCredito();
+			serviciosTarjeta.setTarjeta("5535141128409013");
+			serviciosTarjeta.ClicarConsultar();
+			serviciosTarjeta.Modificar();	
+		}
+
+
+//		@Test
+//		public void testServiciosDebito() {
+//			home.irServiciosTarjeta();
+//			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+//			serviciosTarjeta.ClicarConsultarDebito();
+//			serviciosTarjeta.setTarjeta("5535141128409013 ");
+//			serviciosTarjeta.ClicarConsultar();
+//			serviciosTarjeta.Modificar();
+//
+//		}
+//		
+		@Test
+		public void testServiciosAutorizacion() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarConsultarAutorizacion();
+			serviciosTarjeta.setTarjeta("5351200549004018");
+			serviciosTarjeta.ClicarConsultarAutorizacio();
+
+		}
+		@Test
+		public void testServicioColectivo() {
+			home.irServiciosTarjeta();
+			serviciosTarjeta = new ServiciosTarjetaPage(driver);
+			serviciosTarjeta.ClicarColectivoAlta();
+			serviciosTarjeta.setTarjeta("5351200549004018");
+			//serviciosTarjeta.ClicarConsultarAutorizacio();
+
+		}
+
+	
+		
+		@AfterMethod
+		public void afterMethod() {
+			driver.quit();
+		}
+}
